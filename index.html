@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sports Photography Portfolio</title>
+  <style>
+    /* Basic reset and styling */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      color: #333;
+      line-height: 1.6;
+    }
+    
+    /* Fixed header at the top with explicit height */
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      height: 70px; /* Explicit height */
+      background: #333;
+      color: #fff;
+      z-index: 50; /* Higher than carousels */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    header h1 {
+      font-size: 2em;
+      margin: 0;
+    }
+    
+    /* Carousel containers (fixed) positioned below the header */
+    .portfolio-container {
+      position: fixed;
+      width: 100%;
+      height: 25vh; /* Always 25% of the viewport height */
+      overflow: hidden;
+      z-index: 40;
+    }
+    /* First carousel starts immediately below the header */
+    #carouselContainer1 {
+      top: 70px;
+    }
+    /* Second carousel positioned below the first carousel with a 10px gap */
+    #carouselContainer2 {
+      top: calc(70px + 25vh + 10px);
+    }
+    
+    /* Carousel styling */
+    .carousel {
+      display: flex;
+      overflow-x: auto;
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+      height: 100%;
+      padding: 0 40px; /* Leaves space for arrow buttons */
+    }
+    .carousel::-webkit-scrollbar {
+      display: none;
+    }
+    /* Each carousel item */
+    .carousel-item {
+      flex: 0 0 auto;
+      margin: 0 10px;
+      height: 100%;
+    }
+    .carousel-item img {
+      height: 100%;
+      width: auto;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+      cursor: pointer;
+      transition: transform 0.2s;
+      object-fit: cover;
+    }
+    .carousel-item img:hover {
+      transform: scale(1.03);
+    }
+    
+    /* Arrow button styling */
+    .arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0,0,0,0.5);
+      color: #fff;
+      border: none;
+      padding: 10px;
+      cursor: pointer;
+      z-index: 45;
+      border-radius: 50%;
+      font-size: 1.2em;
+    }
+    .arrow-left {
+      left: 10px;
+    }
+    .arrow-right {
+      right: 10px;
+    }
+    
+    /* Modal overlay for enlarged image (lightbox) */
+    #modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(5px);
+      z-index: 60;
+      justify-content: center;
+      align-items: center;
+    }
+    #modal img {
+      max-width: 90%;
+      max-height: 90%;
+      border-radius: 5px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+      cursor: default;
+    }
+    
+    /* Content below the fixed header and carousels */
+    .content {
+      /* Header (70px) + 2 carousels (2 * 25vh) + gap (10px) + extra space (20px) */
+      margin-top: calc(70px + 2 * 25vh + 10px + 20px);
+      padding: 20px;
+    }
+    footer {
+      background: #000;
+      color: #fff;
+      padding: 20px;
+      text-align: center;
+      font-size: 0.9em;
+    }
+    footer p {
+      margin: 10px 0;
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <h1>Sports Photography Portfolio</h1>
+  </header>
+  
+  <!-- First Carousel Container (Carousel 1) -->
+  <div id="carouselContainer1" class="portfolio-container">
+    <button class="arrow arrow-left" id="arrowLeft1">&#9664;</button>
+    <div class="carousel" id="carousel1">
+      <!-- Carousel 1 images (replace with your own) -->
+      <div class="carousel-item">
+        <img src="photos\FQJlT5JX0Ag9aOk.jpg" alt="Photo 1">
+      </div>
+      <div class="carousel-item">
+        <img src="photos\What-is-Romanticism-in-Art-Wanderer-above-the-Sea-of-Fog-by-Caspar-David-Friedrich.jpg" alt="Photo 2">
+      </div>
+      <div class="carousel-item">
+        <img src="photos\Zaphkiel_a_3d_rendered_white_angellic_shield_logo_with_angel_wi_128656e4-152c-4baf-a68e-41cbc2bbb3da.png" alt="Photo 3">
+      </div>
+      <div class="carousel-item">
+        <img src="photos\Zaphkiel_a_3d_rendered_white_angellic_shield_logo_with_angel_wi_a36d8521-b58c-496b-8d9a-19f1bd80a59a.png" alt="Photo 4">
+      </div>
+      <div class="carousel-item">
+        <img src="photos\What-is-Romanticism-in-Art-Wanderer-above-the-Sea-of-Fog-by-Caspar-David-Friedrich.jpg" alt="Photo 5">
+      </div>
+      <div class="carousel-item">
+        <img src="photos\FQJlT5JX0Ag9aOk.jpg" alt="Photo 1">
+      </div>
+      <div class="carousel-item">
+        <img src="photos\What-is-Romanticism-in-Art-Wanderer-above-the-Sea-of-Fog-by-Caspar-David-Friedrich.jpg" alt="Photo 2">
+      </div>
+      <div class="carousel-item">
+        <img src="photos\Zaphkiel_a_3d_rendered_white_angellic_shield_logo_with_angel_wi_128656e4-152c-4baf-a68e-41cbc2bbb3da.png" alt="Photo 3">
+      </div>
+      <div class="carousel-item">
+        <img src="photos\Zaphkiel_a_3d_rendered_white_angellic_shield_logo_with_angel_wi_a36d8521-b58c-496b-8d9a-19f1bd80a59a.png" alt="Photo 4">
+      </div>
+      <div class="carousel-item">
+        <img src="photos\What-is-Romanticism-in-Art-Wanderer-above-the-Sea-of-Fog-by-Caspar-David-Friedrich.jpg" alt="Photo 5">
+    </div>
+    <button class="arrow arrow-right" id="arrowRight1">&#9654;</button>
+  </div>
+  
+  <!-- Second Carousel Container (Carousel 2) -->
+  <div id="carouselContainer2" class="portfolio-container">
+    <button class="arrow arrow-left" id="arrowLeft2">&#9664;</button>
+    <div class="carousel" id="carousel2">
+      <!-- Carousel 2 images with unique sample images -->
+      <div class="carousel-item">
+        <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse4.mm.bing.net%2Fth%3Fid%3DOIP.mTNSq6u6BiJf98Q7aJZ-mwHaHT%26pid%3DApi&f=1&ipt=6638c9b7827bec4052791e10b8a2f91a03bc8960768018f6701bf7d42790a9cd&ipo=images" alt="Other Photo 1">
+      </div>
+      <div class="carousel-item">
+        <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fpm1.narvii.com%2F7722%2F1f37ef44fd054edde41f92b572872a92ae908e56r1-1400-1400v2_hq.jpg&f=1&nofb=1&ipt=f9444d06b6c20bede9783b09af2c90aa491e6c89576e0beea00314fae5874f4f&ipo=images" alt="Other Photo 2">
+      </div>
+      <div class="carousel-item">
+        <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse3.mm.bing.net%2Fth%3Fid%3DOIP.i4hucgcqmneDUa_KM7iqVAHaEK%26pid%3DApi&f=1&ipt=98f71e371fc714b1cd5b992fa8a6f39dcf2b047b482f54a373a6758e91f6a19a&ipo=images" alt="Other Photo 3">
+      </div>
+      <div class="carousel-item">
+        <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse3.mm.bing.net%2Fth%3Fid%3DOIP.SaJ4eIPnU8x7m6wFDlWo8wHaE5%26pid%3DApi&f=1&ipt=93c29c5dfaa502b8f6d5e3b592e668ad456031f05ba39cd23107c913f86ec1f3&ipo=images" alt="Other Photo 4">
+      </div>
+      <div class="carousel-item">
+        <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse2.mm.bing.net%2Fth%3Fid%3DOIP.wZGO9C52od62svjtHOb1lwHaE8%26pid%3DApi&f=1&ipt=47ea07da7b189270e7d06f7d6e37647b8578aa5cdd4cfbf54b6086e269eacf6d&ipo=images" alt="Other Photo 5">
+      </div>
+      <div class="carousel-item">
+        <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.iQlQ6ShM3ny-XyDpsnkSvAHaE7%26pid%3DApi&f=1&ipt=e588494f0053e40d9e33e584620f4e39032d5dd4f1ce0e466d40d52d1c4abfc2&ipo=images" alt="Other Photo 6">
+      </div>
+      <div class="carousel-item">
+        <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.cQvq8fFRTbDZX7mJp7ACgQHaEb%26pid%3DApi&f=1&ipt=5f695ef3161295b591b82465d6c12434872574057601f39eb0d8f2aacc09bfc3&ipo=images" alt="Other Photo 7">
+      </div>
+      <div class="carousel-item">
+        <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.BiPWFefKDr63amBOvWwg1wHaFc%26pid%3DApi&f=1&ipt=a75d4a1cc83bc247608fe6b957dbc15ab3e607392b78b166341d03ac9696a75c&ipo=images" alt="Other Photo 8">
+      </div>
+      <div class="carousel-item">
+        <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.w1V84op7IuS19Cgwc_PqRAHaGg%26pid%3DApi&f=1&ipt=83384976647ae3001770683fc240a5773726fffebcbbae67892eb1c96b922dd3&ipo=images" alt="Other Photo 9">
+      </div>
+      <div class="carousel-item">
+        <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.RYT-vgJP0mg_UCfmNajjSQHaIA%26pid%3DApi&f=1&ipt=87964fb5a6c7ebb3d318e9132c90fcfef76b0282f95dd5209d6027bbf17e9339&ipo=images" alt="Other Photo 10">
+      </div>
+    </div>
+    <button class="arrow arrow-right" id="arrowRight2">&#9654;</button>
+  </div>
+  
+  
+  <!-- Modal overlay for enlarged image -->
+  <div id="modal">
+    <img id="modal-img" src="" alt="">
+  </div>
+  
+  <!-- Main Content (including Footer) -->
+  <div class="content">
+    <p>Welcome to our sports photography portfolio. Scroll down for more information about our work.</p>
+    <footer>
+      <p><strong>About Us:</strong> We are passionate sports photographers capturing the thrill of the game. Our work speaks for itself.</p>
+      <p><strong>Contact:</strong> Email us at <a href="mailto:contact@sportphoto.com" style="color:#fff;">contact@sportphoto.com</a> or call (555) 123-4567.</p>
+      <p><strong>Created:</strong> March 1, 2025</p>
+      <p>&copy; 2025 Sports Photography Portfolio</p>
+    </footer>
+  </div>
+  
+  <script>
+    // Function to attach scrolling functionality to a given carousel
+    function attachCarouselScroll(carouselId, leftArrowId, rightArrowId) {
+      const carousel = document.getElementById(carouselId);
+      const arrowLeft = document.getElementById(leftArrowId);
+      const arrowRight = document.getElementById(rightArrowId);
+      const scrollAmount = 320; // Adjust as needed
+
+      arrowLeft.addEventListener('click', () => {
+        carousel.scrollBy({
+          left: -scrollAmount,
+          behavior: 'smooth'
+        });
+      });
+      arrowRight.addEventListener('click', () => {
+        carousel.scrollBy({
+          left: scrollAmount,
+          behavior: 'smooth'
+        });
+      });
+    }
+
+    // Function to update blur effect for images in a carousel based on their distance from the center
+    function updateCarouselBlur(carousel) {
+      const rect = carousel.getBoundingClientRect();
+      const centerX = rect.left + rect.width / 2;
+      const images = carousel.querySelectorAll('.carousel-item img');
+      images.forEach(img => {
+        const imgRect = img.getBoundingClientRect();
+        const imgCenterX = imgRect.left + imgRect.width / 2;
+        const distance = Math.abs(centerX - imgCenterX);
+        const maxDistance = rect.width / 2; // maximum distance to consider
+        let blurValue = (distance / maxDistance) * 5; // map distance to blur (max 5px)
+        if (blurValue > 5) blurValue = 5;
+        img.style.filter = `blur(${blurValue}px)`;
+      });
+    }
+
+    // Function to make a carousel loop (simulate infinite scrolling)
+    function makeCarouselLoop(carousel) {
+      // Duplicate carousel items to simulate an infinite loop.
+      // (Note: This is a simple approach and may need adjustment for your content.)
+      const items = carousel.innerHTML;
+      carousel.innerHTML += items;
+      
+      carousel.addEventListener('scroll', () => {
+        // If scrolled past half of the total width, reset by subtracting half the scrollWidth.
+        if (carousel.scrollLeft >= carousel.scrollWidth / 2) {
+          carousel.scrollLeft -= carousel.scrollWidth / 2;
+        } else if (carousel.scrollLeft <= 0) {
+          carousel.scrollLeft += carousel.scrollWidth / 2;
+        }
+      });
+    }
+
+    // Attach scrolling functionality to each carousel separately
+    attachCarouselScroll('carousel1', 'arrowLeft1', 'arrowRight1');
+    attachCarouselScroll('carousel2', 'arrowLeft2', 'arrowRight2');
+
+    // Get references to carousels
+    const carousel1 = document.getElementById('carousel1');
+    const carousel2 = document.getElementById('carousel2');
+
+    // Make carousels loop infinitely
+    makeCarouselLoop(carousel1);
+    makeCarouselLoop(carousel2);
+
+    // Update blur effect on scroll and initially on load
+    carousel1.addEventListener('scroll', () => updateCarouselBlur(carousel1));
+    carousel2.addEventListener('scroll', () => updateCarouselBlur(carousel2));
+    updateCarouselBlur(carousel1);
+    updateCarouselBlur(carousel2);
+
+    // Modal (lightbox) functionality for enlarged images
+    const modal = document.getElementById('modal');
+    const modalImg = document.getElementById('modal-img');
+    const carouselImages = document.querySelectorAll('.carousel-item img');
+
+    carouselImages.forEach(img => {
+      img.addEventListener('click', () => {
+        // Use a full-resolution URL from a data attribute if available; fallback to the src
+        const fullSrc = img.dataset.fullsrc || img.src;
+        modalImg.src = fullSrc;
+        modalImg.alt = img.alt;
+        modal.style.display = 'flex';
+      });
+    });
+
+    // Close the modal when clicking outside the enlarged image
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        modal.style.display = 'none';
+      }
+    });
+  </script>
+</body>
+</html>
